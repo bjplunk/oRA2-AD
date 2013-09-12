@@ -186,15 +186,32 @@ local function sizeFrame(height)
 	mod.frame:SetHeight(28 + height)
 end
 
+-- to know what icon to use for each spell - should have 
+local spell_ids_for_icon = {
+-- spell name                   spell ID
+   ["Rebirth"]                = 26994,
+   ["Innervate"]              = 29166,
+   ["Create Soulstone"]       = 27238,
+   ["Divine Intervention"]    = 19752,
+   ["Blessing of Protection"] = 10278,
+   ["Reincarnation"]          = 20608,
+   ["Bloodlust"]              =  2825,
+   ["Misdirection"]           = 34477,
+   ["Mana Tide"]              = 16191,
+}
+
 function mod:StartCoolDown(player, time, spell)
 	if self.db.profile.hidden then return end
 	if not UnitInRaid(player) then return end
 	local id = "oRAOCoolDown " .. player .. spell
 	local class = select(2, UnitClass(player))
 	local r, g, b = RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b
-   local icon = select(3, GetSpellInfo(spell))
    local text = player
+   local icon = nil
 
+   if spell_ids_for_icon[spell] then
+      icon = select(3, GetSpellInfo(spell_ids_for_icon[spell]))
+   end
    if not icon then
       text = player .. ": " .. spell
    end
