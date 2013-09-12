@@ -1,0 +1,41 @@
+------------------------------------------------------------------------
+r667 | ammo | 2009-08-20 09:45:02 +0000 (Thu, 20 Aug 2009) | 1 line
+Changed paths:
+   A /tags/r666-release (from /trunk:666)
+
+Tagging as r666-release
+------------------------------------------------------------------------
+r666 | ammo | 2009-08-20 08:30:41 +0000 (Thu, 20 Aug 2009) | 1 line
+Changed paths:
+   M /trunk/oRA2.toc
+
+add CandyBar to optdep
+------------------------------------------------------------------------
+r665 | danielbarron | 2009-08-15 12:46:56 +0000 (Sat, 15 Aug 2009) | 1 line
+Changed paths:
+   M /trunk/Leader/oRA2_Leader.toc
+   M /trunk/Optional/oRA2_Optional.toc
+   M /trunk/Participant/oRA2_Participant.toc
+   M /trunk/oRA2.toc
+
+- Updated toc for 3.2.
+------------------------------------------------------------------------
+r664 | danielbarron | 2009-08-14 07:50:43 +0000 (Fri, 14 Aug 2009) | 1 line
+Changed paths:
+   M /trunk/Leader/Item.lua
+
+- Added the ability to allow other addons to ask oRA2 to perform item checks.
+------------------------------------------------------------------------
+r663 | rabbit | 2009-08-05 13:23:11 +0000 (Wed, 05 Aug 2009) | 1 line
+Changed paths:
+   M /trunk/oRA2.toc
+
+OptDep on WindowLib.
+------------------------------------------------------------------------
+r662 | kagaro | 2009-06-16 12:23:37 +0000 (Tue, 16 Jun 2009) | 1 line
+Changed paths:
+   M /trunk/Optional/MainTank.lua
+   M /trunk/Participant/MainTank.lua
+
+Patch: dont trigger tank death warning for hunters who feign death. Also updates thier health status to FD
+------------------------------------------------------------------------

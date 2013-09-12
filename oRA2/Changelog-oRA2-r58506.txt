@@ -1,0 +1,140 @@
+------------------------------------------------------------------------
+r58506 | 7destiny | 2008-01-14 19:25:31 -0500 (Mon, 14 Jan 2008) | 2 lines
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: koKR Update
+
+------------------------------------------------------------------------
+r58476 | ammo | 2008-01-14 10:02:41 -0500 (Mon, 14 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: don't report readycheck results when closing window, it'll report at the end of the check
+------------------------------------------------------------------------
+r58474 | ammo | 2008-01-14 09:52:03 -0500 (Mon, 14 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: place the report window above the readycheckframe
+------------------------------------------------------------------------
+r58461 | 7destiny | 2008-01-14 03:45:52 -0500 (Mon, 14 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: koKR Update
+------------------------------------------------------------------------
+r58406 | ananhaid | 2008-01-13 08:53:14 -0500 (Sun, 13 Jan 2008) | 2 lines
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: 
+- zhCN update.
+------------------------------------------------------------------------
+r58400 | pettigrow | 2008-01-13 06:46:55 -0500 (Sun, 13 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Core.lua
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: frFR Update
+------------------------------------------------------------------------
+r58399 | ammo | 2008-01-13 05:56:07 -0500 (Sun, 13 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: add toggles for showing the readycheck results
+------------------------------------------------------------------------
+r58255 | ananhaid | 2008-01-11 10:16:56 -0500 (Fri, 11 Jan 2008) | 3 lines
+Changed paths:
+   M /trunk/oRA2/Core.lua
+   M /trunk/oRA2/Leader/Invite.lua
+   M /trunk/oRA2/Leader/Item.lua
+   M /trunk/oRA2/Leader/Loot.lua
+   M /trunk/oRA2/Leader/MainTank.lua
+   M /trunk/oRA2/Leader/RaidWarn.lua
+   M /trunk/oRA2/Leader/Ready.lua
+   M /trunk/oRA2/Leader/Resist.lua
+   M /trunk/oRA2/Optional/CoolDown.lua
+   M /trunk/oRA2/Optional/Group.lua
+   M /trunk/oRA2/Optional/MainTank.lua
+   M /trunk/oRA2/Optional/PlayerTarget.lua
+   M /trunk/oRA2/Optional/Resurrection.lua
+   M /trunk/oRA2/Optional/Version.lua
+   M /trunk/oRA2/Optional/Zone.lua
+   M /trunk/oRA2/Options.lua
+   M /trunk/oRA2/Participant/Item.lua
+   M /trunk/oRA2/Participant/MainTank.lua
+   M /trunk/oRA2/Participant/Participant.lua
+   M /trunk/oRA2/Participant/RaidWarn.lua
+   M /trunk/oRA2/Participant/Ready.lua
+   M /trunk/oRA2/oRA2.toc
+
+oRA2: 
+- zhCN update.
+
+------------------------------------------------------------------------
+r58233 | ammo | 2008-01-11 03:02:34 -0500 (Fri, 11 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Item.lua
+
+oRA2: restore ctra compatibility, stick to translating scorpio.
+------------------------------------------------------------------------
+r58232 | ammo | 2008-01-11 03:02:33 -0500 (Fri, 11 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Participant/Item.lua
+
+oRA2: restore ctra compatibility, stick to translating scorpio.
+------------------------------------------------------------------------
+r58217 | scorpio0920 | 2008-01-10 21:46:38 -0500 (Thu, 10 Jan 2008) | 3 lines
+Changed paths:
+   M /trunk/oRA2/Leader/Item.lua
+   M /trunk/oRA2/Participant/Item.lua
+
+oRA2:
+Updated reagent for Druid.
+Updated zhTW localization.
+------------------------------------------------------------------------
+r58151 | ammo | 2008-01-09 18:32:36 -0500 (Wed, 09 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: less erroring on readycheck close button
+------------------------------------------------------------------------
+r58123 | ammo | 2008-01-09 07:48:39 -0500 (Wed, 09 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Core.lua
+
+oRA2: bump ctra version
+------------------------------------------------------------------------
+r58119 | ammo | 2008-01-09 07:26:55 -0500 (Wed, 09 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: don't create a function every readycheck
+------------------------------------------------------------------------
+r58118 | ammo | 2008-01-09 07:22:04 -0500 (Wed, 09 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Optional/MainTank.lua
+
+oRA2: register for regen enabled to make the maintank thing work 
+------------------------------------------------------------------------
+r58116 | ammo | 2008-01-09 07:16:45 -0500 (Wed, 09 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Optional/MainTank.lua
+
+oRA2: when the maintanks get updated in combat schedule an update for after combat.
+------------------------------------------------------------------------
+r58115 | ammo | 2008-01-09 07:11:31 -0500 (Wed, 09 Jan 2008) | 3 lines
+Changed paths:
+   M /trunk/oRA2/Leader/Ready.lua
+
+oRA2: Make the leader readycheck module use the blizzard readychecks.
+All assistants/leaders will get the report window.
+Participant readycheck module untouched incase your raidleader doesn't use an updated oRA2 or uses CTRA.
+------------------------------------------------------------------------
+r57984 | rabbit | 2008-01-06 18:36:04 -0500 (Sun, 06 Jan 2008) | 1 line
+Changed paths:
+   M /trunk/oRA2/Core.lua
+
+oRA2: Don't error when trying to get the colored name for a pet.
+------------------------------------------------------------------------
