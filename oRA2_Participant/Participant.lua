@@ -104,7 +104,7 @@ local watched_spells = {
    ["Blessing of Protection"] =  300, -- need to test
 -- ["Reincarnation"]          =    0, -- special case handled in mod:BAG_UPDATE()
    ["Bloodlust"]              =  600, -- need to test
-   ["Feign Death"]            =   30, -- need to test
+   ["Misdirection"]            =   60, -- need to test
    ["Shield Wall"]            = 1800, -- need to test
 }
 
