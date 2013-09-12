@@ -106,7 +106,6 @@ local watched_spells = {
    ["Bloodlust"]              =  600, -- need to test
    ["Misdirection"]            =   60,
    ["Feign Death"]            =   30,
-   ["Shield Wall"]            = 1800, -- need to test
 }
 
 function mod:PLAYER_ALIVE()
