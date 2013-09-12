@@ -104,8 +104,8 @@ local watched_spells = {
    ["Blessing of Protection"] =  300, -- need to test
 -- ["Reincarnation"]          =    0, -- special case handled in mod:BAG_UPDATE()
    ["Bloodlust"]              =  600, -- need to test
-   ["Misdirection"]            =   60,
-   ["Feign Death"]            =   30,
+   ["Misdirection"]            =  60,
+   ["Mana Tide"]              =  300,
 }
 
 function mod:PLAYER_ALIVE()
@@ -129,7 +129,6 @@ end
 function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spell, rank)
 	if unit ~= "player" then return end
 
-   DEFAULT_CHAT_FRAME:AddMessage("oRA2 Test! Using [" .. spell .. "]")
 
    if spell and watched_spells[spell] and watched_spells[spell] ~= 0 then
       oRA:SendMessage("CD [" .. spell .. "] " .. watched_spells[spell])
