@@ -72,7 +72,7 @@ mod.name = L["Participant"]
 function mod:OnEnable()
 	-- CoolDowns
 	local _, c = UnitClass("player")
-	if c == "DRUID" or c == "WARLOCK" or c == "PALADIN" or c == "HUNTER" or c == "WARRIOR" or c == "SHAMAN" then
+	if c == "DRUID" or c == "WARLOCK" or c == "PALADIN" or c == "HUNTER" or c == "SHAMAN" then
 		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	elseif c == "SHAMAN" then
 		self:RegisterEvent("PLAYER_ALIVE")
