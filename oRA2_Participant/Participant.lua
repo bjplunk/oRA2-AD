@@ -72,7 +72,7 @@ mod.name = L["Participant"]
 function mod:OnEnable()
 	-- CoolDowns
 	local _, c = UnitClass("player")
-	if c == "DRUID" or c == "WARLOCK" or c == "PALADIN" then
+	if c == "DRUID" or c == "WARLOCK" or c == "PALADIN" or c == "HUNTER" or c == "WARRIOR" or c == "SHAMAN" then
 		self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 	elseif c == "SHAMAN" then
 		self:RegisterEvent("PLAYER_ALIVE")
@@ -95,6 +95,18 @@ end
 ------------------------------
 --      Event Handlers      --
 ------------------------------
+local watched_spells = {
+-- spell name,                   seconds
+   ["Rebirth"]                = 1200,
+   ["Innervate"]              =  360,
+   ["Create Soulstone"]       = 1800, -- need to test - not sure if it's Create Soulstone or Soulstone Resurrection
+   ["Divine Intervention"]    = 3600, -- need to test
+   ["Blessing of Protection"] =  300, -- need to test
+-- ["Reincarnation"]          =    0, -- special case handled in mod:BAG_UPDATE()
+   ["Bloodlust"]              =  600, -- need to test
+   ["Feign Death"]            =   30, -- need to test
+   ["Shield Wall"]            = 1800, -- need to test
+}
 
 function mod:PLAYER_ALIVE()
 	shamanResTime = GetTime()
@@ -109,24 +121,20 @@ function mod:BAG_UPDATE()
 	if newankhs == (ankhs - 1) then
 		local _, _, _, _, rank = GetTalentInfo(3, 3)
 		local cooldown = 60 - (rank * 10)
-		oRA:SendMessage("CD 2 " .. cooldown)
+      oRA:SendMessage("CD [Reincarnation] " .. cooldown)
 	end
 	ankhs = newankhs
 end
 
-local rebirth = GetSpellInfo(26994) -- Rebirth
-local soulstone = GetSpellInfo(20707) -- Soulstone Resurrection
-local divine = GetSpellInfo(19752) -- Divine Intervention
 function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spell, rank)
 	if unit ~= "player" then return end
 
-	if spell == rebirth then -- 26994
-		oRA:SendMessage("CD 1 20")
-	elseif spell == soulstone then -- 20707
-		oRA:SendMessage("CD 3 30")
-	elseif spell == divine then --19752
-		oRA:SendMessage("CD 4 20", true) -- only oRA2 clients will receive this cooldown I just numbered on.
-	end
+   DEFAULT_CHAT_FRAME:AddMessage("oRA2 Test! Using [" .. spell .. "]")
+
+   if spell and watched_spells[spell] and watched_spells[spell] ~= 0 then
+      oRA:SendMessage("CD [" .. spell .. "] " .. watched_spells[spell])
+   end
+
 	-- call for resurrection check
 	self:SpellStopped(unit)
 end

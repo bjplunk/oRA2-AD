@@ -1,5 +1,5 @@
 assert(oRA, "oRA not found!")
-local revision = tonumber(("$Revision: 999 $"):match("%d+"))
+local revision = tonumber(("$Revision: 1000 $"):match("%d+"))
 if oRA.version < revision then oRA.version = revision end
 
 ------------------------------

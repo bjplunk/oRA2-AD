@@ -109,26 +109,40 @@ end
 function mod:oRA_JoinedRaid()
 	local t = time()
 	for i = 1, GetNumRaidMembers() do
-		local n = GetRaidRosterInfo(i)
-		local val = self.db.realm.cooldowns[n]
-		if val and t < val then
-			self:StartCoolDown(n, val - t)
-		end
+		local name = GetRaidRosterInfo(i)
+		local spells = self.db.realm.cooldowns[name]
+      if spells then
+         for sp,cd in pairs(spells) do
+            if t < cd then
+               self:StartCoolDown(name, cd - t, sp)
+            else
+               spells[sp] = nil
+               if next(self.db.realm.cooldowns[name]) == nil then
+                  self.db.realm.cooldowns[name] = nil
+               end
+            end
+         end
+      end
 	end
 end
 
 function mod:oRA_CoolDown(msg, author)
-	local what, length = select(3, msg:find("^CD (%d+) (%d+)"))
-	if author and what and tonumber(length) then
-		local l = tonumber(length) * 60
-		self.db.realm.cooldowns[author] = time() + l
-		self:StartCoolDown(author, l)
+	local spell, length = select(3, msg:find("^CD %[([%w%s]+)%] (%d+)"))
+	if author and spell and tonumber(length) then
+		local cooldown = tonumber(length)
+      if not self.db.realm.cooldowns[author] then
+         self.db.realm.cooldowns[author] = {}
+      end
+		self.db.realm.cooldowns[author][spell] = time() + cooldown
+		self:StartCoolDown(author, cooldown, spell)
 	end
 end
 
 function mod:oRA_BarTexture(texture)
-	for key, val in pairs(self.db.realm.cooldowns) do
-		self:SetCandyBarTexture("oRAOCoolDown "..key, media:Fetch("statusbar", texture))
+	for name, spells in pairs(self.db.realm.cooldowns) do
+      for sp,cd in pairs(spells) do
+		   self:SetCandyBarTexture("oRAOCoolDown "..name..sp, media:Fetch("statusbar", texture))
+      end
 	end
 end
 
@@ -138,21 +152,33 @@ end
 
 function mod:StartAllCoolDowns()
 	local t = time()
-	for key, val in pairs(self.db.realm.cooldowns) do
-		if t >= val then
-			self.db.realm.cooldowns[key] = nil
-			self:StopCoolDown(key)
-		else
-			self:StartCoolDown(key, val - t)
-		end
+	for name, spells in pairs(self.db.realm.cooldowns) do
+      for sp,cd in pairs(spells) do
+         if t >= cd then
+            spells[sp] = nil
+            self:StopCoolDown(name, sp)
+            if next(self.db.realm.cooldowns[name]) == nil then
+               self.db.realm.cooldowns[name] = nil
+            end
+         else
+            self:StartCoolDown(name, cd - t, sp)
+         end         
+      end
 	end
 end
 
 function mod:StopAllCoolDowns()
 	local t = time()
-	for key, val in pairs(self.db.realm.cooldowns) do
-		if t >= val then self.db.realm.cooldowns[key] = nil end
-		self:StopCoolDown(key)
+	for name, spells in pairs(self.db.realm.cooldowns) do
+      for sp,cd in pairs(spells) do
+         if t >= cd then
+            spells[sp] = nil
+         end
+         self:StopCoolDown(name, sp)
+      end
+      if self.db.realm.cooldowns[name] and next(self.db.realm.cooldowns[name]) == nil then
+         self.db.realm.cooldowns[name] = nil
+      end
 	end
 end
 
@@ -160,17 +186,23 @@ local function sizeFrame(height)
 	mod.frame:SetHeight(28 + height)
 end
 
-function mod:StartCoolDown(player, time)
+function mod:StartCoolDown(player, time, spell)
 	if self.db.profile.hidden then return end
 	if not UnitInRaid(player) then return end
-	local id = "oRAOCoolDown " .. player
+	local id = "oRAOCoolDown " .. player .. spell
 	local class = select(2, UnitClass(player))
 	local r, g, b = RAID_CLASS_COLORS[class].r, RAID_CLASS_COLORS[class].g, RAID_CLASS_COLORS[class].b
+   local icon = select(3, GetSpellInfo(spell))
+   local text = player
+
+   if not icon then
+      text = player .. ": " .. spell
+   end
 
 	self:RegisterCandyBarGroup("oRAOCoolDownGroup")
 	self:SetCandyBarGroupPoint("oRAOCoolDownGroup", "TOP", self.frame.title, "BOTTOM", 0, -5)
 	self:SetCandyBarOnSizeGroup("oRAOCoolDownGroup", sizeFrame)
-	self:RegisterCandyBar(id, time, player, nil, r, g, b)
+	self:RegisterCandyBar(id, time, text, icon, r, g, b)
 	self:RegisterCandyBarWithGroup(id, "oRAOCoolDownGroup")
 	self:SetCandyBarWidth(id, 150)
 	self:SetCandyBarTexture(id, media:Fetch('statusbar', oRA.db.profile.bartexture))
@@ -178,8 +210,8 @@ function mod:StartCoolDown(player, time)
 	self:StartCandyBar(id, true)
 end
 
-function mod:StopCoolDown(player)
-	self:UnregisterCandyBar("oRAOCoolDown "..player)
+function mod:StopCoolDown(player, spell)
+	self:UnregisterCandyBar("oRAOCoolDown "..player..spell)
 end
 
 ------------------------
@@ -201,9 +233,11 @@ function mod:OnToggleFrame(v)  -- called by core window handler
 end
 
 function mod:OnSetScale(scale)  -- called by core window handler
-	for key, val in pairs(self.db.realm.cooldowns) do
-		if self:IsCandyBarRegistered("oRAOCoolDown "..key) then
-			self:SetCandyBarScale("oRAOCoolDown "..key, scale)
+	for name, spells in pairs(self.db.realm.cooldowns) do
+      for sp, cd in pairs(spells) do
+		   if self:IsCandyBarRegistered("oRAOCoolDown "..name..sp) then
+		      self:SetCandyBarScale("oRAOCoolDown "..name..sp, scale)
+         end
 		end
 	end
 end
