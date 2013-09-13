@@ -95,6 +95,7 @@ end
 ------------------------------
 --      Event Handlers      --
 ------------------------------
+-- if adding a spell here, then the spell_ids_for_icon table in oRA2_Optional/CoolDown.lua should be updated too
 local watched_spells = {
 -- spell name,                   seconds
    ["Rebirth"]                = 1200,
@@ -103,8 +104,8 @@ local watched_spells = {
    ["Divine Intervention"]    = 3600, -- need to test
    ["Blessing of Protection"] =  300, -- need to test
 -- ["Reincarnation"]          =    0, -- special case handled in mod:BAG_UPDATE()
-   ["Bloodlust"]              =  600, -- need to test
-   ["Misdirection"]            =  60,
+   ["Bloodlust"]              =  600,
+   ["Misdirection"]           =  60,
    ["Mana Tide"]              =  300,
 }
 
