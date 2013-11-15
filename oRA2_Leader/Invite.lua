@@ -606,16 +606,16 @@ function mod:InviteGuild(level)
 
 	if not level or not tonumber(level) or level == "" then level = MAX_PLAYER_LEVEL end
 	level = tonumber(level)
-	SendChatMessage(L["All level %d or higher characters will be invited to raid in 10 seconds. Please leave your groups."]:format(level), "GUILD")
-	self:ScheduleEvent(doGuildInvites, 10, level, nil, nil)
+	SendChatMessage(L["All level %d or higher characters will be invited to raid. Please leave your groups."]:format(level), "GUILD")
+	self:ScheduleEvent(doGuildInvites, 0, level, nil, nil)
 end
 
 function mod:GInviteZone()
 	oRA:ToggleModuleActive(self, true)
 
 	local currentZone = GetRealZoneText()
-	SendChatMessage(L["All characters in %s will be invited to raid in 10 seconds. Please leave your groups."]:format(currentZone), "GUILD")
-	self:ScheduleEvent(doGuildInvites, 10, nil, currentZone, nil)
+	SendChatMessage(L["All characters in %s will be invited to raid. Please leave your groups."]:format(currentZone), "GUILD")
+	self:ScheduleEvent(doGuildInvites, 0, nil, currentZone, nil)
 end
 
 function mod:GInviteRank(rank)
@@ -647,8 +647,8 @@ function mod:GInviteRank(rank)
 	GuildControlSetRank(rankId)
 	local _, _, ochat = GuildControlGetRankFlags()
 	local channel = ochat and "OFFICER" or "GUILD"
-	SendChatMessage(L["All characters of rank %s or higher will be invited to raid in 10 seconds. Please leave your groups."]:format(rankName), channel)
-	self:ScheduleEvent(doGuildInvites, 10, nil, nil, rankId)
+	SendChatMessage(L["All characters of rank %s or higher will be invited to raid in 5 seconds. Please leave your groups."]:format(rankName), channel)
+	self:ScheduleEvent(doGuildInvites, 5, nil, nil, rankId)
 end
 
 function mod:SetKeyword(keyword)
